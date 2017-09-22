@@ -9,7 +9,7 @@ using System.IO;
 namespace TestTask
 {
     public enum TypeImgPath { File, Net }
-    
+
     public class ASCIIConverter
     {
         private static List<String> _syb = new List<string>()
@@ -29,6 +29,24 @@ namespace TestTask
             return ActionConvert(OpenSmallFile(_pathImg, width, height));
         }
 
+        // Сжатие в пропорциях
+        public static String ConvertToSmartSize(String _pathImg)
+        {
+            Bitmap tmp = new Bitmap(Image.FromFile(_pathImg)); // Достаём изображение
+
+            // Прикидываем к-т сжатия
+            int i = 2;
+
+            int size = Math.Max(tmp.Width, tmp.Height); // Выбираем относительно чего сжимать
+
+            while (size/i>50) // Пока изображение будет большим
+            {
+                i++;
+            }
+
+            return ActionConvert(OpenSmallFile(_pathImg, tmp.Width/i, tmp.Height/i)); 
+        }
+
         /// <summary>
         /// Кодирует изображение в набор символов с таким же количеством символов, что и изображение
         /// </summary>
@@ -36,7 +54,15 @@ namespace TestTask
         /// <returns>Строку с результатом</returns>
         public static String ConvertToRealSize(String pathImg) => ActionConvert(OpenFullFile(pathImg)); 
 
+        /// <summary>
+        /// Возвращает список используемых символов
+        /// </summary>
+        /// <returns>List<String></returns>
         public static List<String> GetListSyb() => _syb;
+
+        /// <summary>
+        /// Установить список новых символов
+        /// </summary>
         public static void SetSyb(List<String> lst)
         {
             _syb = lst;
@@ -50,6 +76,7 @@ namespace TestTask
         {
             return new Bitmap(pathImg); // Открываем изобрежение
         }
+
         /// <summary>
         /// Открывает изображение с указанными размерами
         /// </summary>
@@ -60,6 +87,7 @@ namespace TestTask
         {
             return new Bitmap(Image.FromFile(pathImg), width, height);
         }
+
         /// <summary>
         /// Выполняет кодирование
         /// </summary>
@@ -83,6 +111,7 @@ namespace TestTask
 
             return tmp;
         }
+
         /// <summary>
         /// Достаёт символ, который необходимо подставить
         /// </summary>
@@ -92,7 +121,7 @@ namespace TestTask
         {
             for (int i = 0; i < _syb.Count() - 1; i++)
             {
-                if ((c>255*i/_syb.Count()) && (c < 255 * (i + 1) / _syb.Count())) return Convert.ToString(_syb[i]);
+                if ((c > 255 * i / _syb.Count()) && (c < 255 * (i + 1) / _syb.Count())) return Convert.ToString(_syb[i]);
             }
 
             return _syb.Last();

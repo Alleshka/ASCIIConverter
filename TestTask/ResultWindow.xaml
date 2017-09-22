@@ -8,6 +8,6 @@
         Title="ResultWindow" Height="300" Width="600">
     <Grid>
         <Image Width="250" Height="250" HorizontalAlignment="Left" x:Name="_img"></Image>
-        <TextBox x:Name="_res" Margin="344,10,-0.4,10.4"/>
+        <TextBox x:Name="_res" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="294,10,-0.4,10.4"/>
     </Grid>
 </Window>

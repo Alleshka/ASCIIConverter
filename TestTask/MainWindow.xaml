@@ -15,7 +15,7 @@
 
         <Expander Header="Дополнительные настройки">
             <StackPanel>
-                <Expander Header="Настройки символов" Expanded="Expander_Expanded">
+                <Expander Header="Настройки символов" Expanded="Expander_Expanded" BorderBrush="Blue">
                     <StackPanel>
                         <Grid>
                             <TextBox x:Name="_newSyb" Width="150" HorizontalAlignment="Left">$</TextBox>
@@ -28,18 +28,19 @@
                 </Expander>
                 <Expander Header="Настройки сохранения">
                     <StackPanel>
-                        <CheckBox x:Name="_toTextBox">Вывод в новом окне</CheckBox>
+                        <CheckBox x:Name="_toTextBox" IsChecked="True">Вывод в новом окне</CheckBox>
                         <CheckBox x:Name="_toClipboard" IsChecked="True">Сохранить в буфер</CheckBox>
-                        <CheckBox x:Name="_toFile" Click="_toFile_Click" IsChecked="True">
+                        <CheckBox x:Name="_toFile" Click="_toFile_Click">
                             <TextBlock x:Name="_toFileText">Сохранить в файл</TextBlock>
                         </CheckBox>
-                        <CheckBox x:Name="_opetnNewFile" IsChecked="True">Открыть файл</CheckBox>
+                        <CheckBox x:Name="_opetnNewFile" IsEnabled="False">Открыть файл</CheckBox>
                     </StackPanel>
                 </Expander>
                 <Expander Header="Настройки программы">
                     <StackPanel>
                         <CheckBox x:Name="Compress" IsChecked="True" Click="Compress_Click">Сжимать изображение</CheckBox>
-                        <Expander Header="Настройки сжатия" x:Name="_setCompressExp">
+                        <CheckBox x:Name="SmartCompress" Click="SmartCompress_Click" IsChecked="True">Сжатие в пропорциях</CheckBox>
+                        <Expander Header="Настройки сжатия" x:Name="_setCompressExp" IsEnabled="False">
                             <StackPanel>
                                 <Grid>
                                     <TextBlock Width="125" HorizontalAlignment="Left">Длина</TextBlock>

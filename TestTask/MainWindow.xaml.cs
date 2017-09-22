@@ -22,6 +22,8 @@ namespace TestTask
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool flag = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -40,7 +42,7 @@ namespace TestTask
         {
             OpenFileDialog dialog = new OpenFileDialog()
             {
-               Filter = "Изображения (*.jpg;*.png)|*.jpg;*.png;*.gif",
+               Filter = "Изображения (*.jpg;*.png;*.gif)|*.jpg;*.png;*.gif",
                InitialDirectory = "Test2"
             };
 
@@ -142,10 +144,17 @@ namespace TestTask
                 // Так как может обрабатываться долго, запускаю в отдельном потоке
                 if (Compress.IsChecked==true)
                 {
-                    int w = Convert.ToInt32(_compressWidth.Text);
-                    int h = Convert.ToInt32(_compressHeight.Text);
+                    if (SmartCompress.IsChecked == false)
+                    {
+                        int w = Convert.ToInt32(_compressWidth.Text);
+                        int h = Convert.ToInt32(_compressHeight.Text);
 
-                    run = new Task<String>(()=>ASCIIConverter.ConvertToSize(path, w, h));
+                        run = new Task<String>(() => ASCIIConverter.ConvertToSize(path, w, h));
+                    }
+                    else
+                    {
+                        run = new Task<string>(() => ASCIIConverter.ConvertToSmartSize(path));
+                    }
                 }
                 else // Если не стоит
                 {  
@@ -212,6 +221,21 @@ namespace TestTask
         private void Compress_Click(object sender, RoutedEventArgs e)
         {
             if (Compress.IsChecked == true)
+            {
+                _setCompressExp.IsEnabled = true;
+                SmartCompress.IsEnabled = true;
+            }
+            else
+            {
+                _setCompressExp.IsEnabled = false;
+                _setCompressExp.IsExpanded = false;
+                SmartCompress.IsEnabled = false;
+            }
+        }
+
+        private void SmartCompress_Click(object sender, RoutedEventArgs e)
+        {
+            if (SmartCompress.IsChecked == false)
             {
                 _setCompressExp.IsEnabled = true;
             }
