@@ -5,46 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestTask"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="300">
+        Title="MainWindow" Height="450" Width="300">
     <StackPanel>
         <TextBlock>Путь до изображения:</TextBlock>
         <Grid>
-            <TextBox x:Name="_pathToPicture" HorizontalAlignment="Left" Width="255"></TextBox>
-            <Button x:Name="BtnChoose" HorizontalAlignment="Right" Width="35" Margin="0,0,-0.4,0.2" Click="BtnChoose_Click">...</Button>
+            <TextBox x:Name="_pathToPicture" Margin="0,0,38.6,0.2"/>
+            <Button x:Name="BtnChoose" HorizontalAlignment="Right" Width="35" Click="BtnChoose_Click" Height="19" VerticalAlignment="Bottom">...</Button>
         </Grid>
 
-        <Expander Header="Настройки символов" Expanded="Expander_Expanded">
+        <Expander Header="Дополнительные настройки">
             <StackPanel>
-                <ListBox x:Name="_listSyb" BorderBrush="Black"></ListBox>
-                <Grid>
-                    <TextBox x:Name="_newSyb" Width="225" HorizontalAlignment="Left">$</TextBox>
-                    <Button x:Name="BtnAddNewSyb" HorizontalAlignment="Right" Margin="0,0,0.2,0" Height="19" VerticalAlignment="Top" Click="BtnAddNewSyb_Click">Добавить</Button>
-                </Grid>
-                <Button x:Name="BtnDel" Click="BtnDel_Click">Удалить выбранный</Button>
-                <Button x:Name="SaveSyb" Click="SaveSyb_Click">Сохрнить изменения</Button>
-            </StackPanel>
-        </Expander>
-        <Expander Header="Настройки сохранения">
-            <StackPanel>
-                <CheckBox x:Name="_toTextBox">Вывод в новом окне</CheckBox>
-                <CheckBox x:Name="_toClipboard">Сохранить в буфер</CheckBox>
-                <CheckBox x:Name="_toFile">Вывод в файл:</CheckBox>
-                <CheckBox x:Name="_opetnNewFile">Открыть файл</CheckBox>
-            </StackPanel>
-        </Expander>
-        <Expander Header="Настройки программы">
-            <StackPanel>
-                <CheckBox x:Name="Compress">Сжимать изображение</CheckBox>
-                <Expander Header="Настройки сжатия">
+                <Expander Header="Настройки символов" Expanded="Expander_Expanded">
                     <StackPanel>
                         <Grid>
-                            <TextBlock Width="125" HorizontalAlignment="Left">Длина</TextBlock>
-                            <TextBlock Width="125" HorizontalAlignment="Right">Высота</TextBlock>
+                            <TextBox x:Name="_newSyb" Width="150" HorizontalAlignment="Left">$</TextBox>
+                            <Button x:Name="BtnAddNewSyb" HorizontalAlignment="Right" VerticalAlignment="Top" Click="BtnAddNewSyb_Click">Добавить символ</Button>
                         </Grid>
-                        <Grid>
-                        <TextBox x:Name="_compressWidth" Width="125" HorizontalAlignment="Left">50</TextBox>
-                        <TextBox x:Name="_compressHeight" Width="125" HorizontalAlignment="Right">50</TextBox>
-                    </Grid>
+                        <ListBox x:Name="_listSyb" BorderBrush="Black"></ListBox>
+                        <Button x:Name="BtnDel" Click="BtnDel_Click">Удалить выбранный</Button>
+                        <Button x:Name="SaveSyb" Click="SaveSyb_Click">Сохранить изменения</Button>
+                    </StackPanel>
+                </Expander>
+                <Expander Header="Настройки сохранения">
+                    <StackPanel>
+                        <CheckBox x:Name="_toTextBox">Вывод в новом окне</CheckBox>
+                        <CheckBox x:Name="_toClipboard" IsChecked="True">Сохранить в буфер</CheckBox>
+                        <CheckBox x:Name="_toFile" Click="_toFile_Click" IsChecked="True">
+                            <TextBlock x:Name="_toFileText">Сохранить в файл</TextBlock>
+                        </CheckBox>
+                        <CheckBox x:Name="_opetnNewFile" IsChecked="True">Открыть файл</CheckBox>
+                    </StackPanel>
+                </Expander>
+                <Expander Header="Настройки программы">
+                    <StackPanel>
+                        <CheckBox x:Name="Compress" IsChecked="True" Click="Compress_Click">Сжимать изображение</CheckBox>
+                        <Expander Header="Настройки сжатия" x:Name="_setCompressExp">
+                            <StackPanel>
+                                <Grid>
+                                    <TextBlock Width="125" HorizontalAlignment="Left">Длина</TextBlock>
+                                    <TextBlock Width="125" HorizontalAlignment="Right">Высота</TextBlock>
+                                </Grid>
+                                <Grid>
+                                    <TextBox x:Name="_compressWidth" Width="125" HorizontalAlignment="Left">50</TextBox>
+                                    <TextBox x:Name="_compressHeight" Width="125" HorizontalAlignment="Right">50</TextBox>
+                                </Grid>
+                            </StackPanel>
+                        </Expander>
                     </StackPanel>
                 </Expander>
             </StackPanel>
