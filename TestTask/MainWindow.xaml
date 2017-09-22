@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestTask"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="350" Width="300">
+    <StackPanel>
+        <TextBlock>Путь до изображения:</TextBlock>
+        <Grid>
+            <TextBox x:Name="_pathToPicture" HorizontalAlignment="Left" Width="255"></TextBox>
+            <Button x:Name="BtnChoose" HorizontalAlignment="Right" Width="35" Margin="0,0,-0.4,0.2" Click="BtnChoose_Click">...</Button>
+        </Grid>
+        <Button x:Name="BtnStart" Click="BtnStart_Click">Преобразовать</Button>
+    </StackPanel>
 </Window>

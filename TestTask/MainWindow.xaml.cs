@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace TestTask
 {
@@ -23,6 +24,23 @@ namespace TestTask
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void BtnStart_Click(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(ASCIIConverter.Convert(_pathToPicture.Text));
+            MessageBox.Show("Содержимое в буфере");
+        }
+
+        private void BtnChoose_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Изображения (*.jpg;*.png)|*.jpg;*.png;*.gif";
+
+            if (dialog.ShowDialog() == true)
+            {
+                _pathToPicture.Text = dialog.FileName;
+            }
         }
     }
 }
